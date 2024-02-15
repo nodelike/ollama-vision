@@ -10,10 +10,12 @@ import threading
 app = Flask(__name__)
 CORS(app)
 
+systemPrompt = 'what is in this image?'
+
 responses = Queue()
 
 def llava(img):
-    stream = ollama.generate('vision', 'what is in this image?', images=[img], stream=True)
+    stream = ollama.generate('vision', systemPrompt, images=[img], stream=True)
     for chunk in stream:
         responses.put(chunk['response'])
     responses.put("end-stream")

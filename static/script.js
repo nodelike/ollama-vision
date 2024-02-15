@@ -48,6 +48,7 @@ function captureImage() {
         formData.append('image', blob);
 
         
+        
         fetch('/process_image', { method: 'POST', body: formData })
         .then(() => {
             const source = new EventSource('/stream_response');

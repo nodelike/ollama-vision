@@ -11,13 +11,21 @@
         <div class="left-col">
             <video id="feed" autoplay></video>
             <span class="inputSpan">
+                <label for="model">Select your vision model:</label>
+                <select name="model" id="model">
+                    <option value="">ava</option>
+                    <option value="">vision</option>
+                </select>
+            </span>
+
+            <span class="inputSpan">
                 <label for="system-prompt">System Prompt:</label>
                 <input id="system-prompt" type="text" placeholder="Enter the system prompt" value="Whats in this image?">
             </span>
             
             <div class="btn-container">
-                <button id="live-think">Live think</button>
-                <button id="capture-think">Capture Think</button>
+                <button id="live-think">👀 Live think</button>
+                <button id="capture-think">📸 Capture think</button>
             </div>
         </div>
 
