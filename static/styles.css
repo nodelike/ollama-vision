@@ -58,6 +58,12 @@ body {
     margin-top: 10px;
 }
 
+.inputSpan input[disabled]{
+    background: #303030;
+    color: #bfbfbf;
+    cursor: not-allowed;
+}
+
 .inputSpan select{
     background: #111;
     color: white;
@@ -65,6 +71,12 @@ body {
     border-radius: 6px;
     padding: 10px 15px;
     margin-top: 10px;
+}
+
+.inputSpan select[disabled]{
+    background: #303030;
+    color: #bfbfbf;
+    cursor: not-allowed;
 }
 
 .btn-container {
@@ -84,7 +96,7 @@ body {
     min-width: 155px;
 }
 
-.btn-container button:hover{
+.btn-container .active{
     background: #50C878;
 }
 

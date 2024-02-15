@@ -11,6 +11,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
         liveThink = !liveThink;
         if(liveThink){
             liveThinkBtn.style.background = '#50C878'
+            liveThinkBtn.classList.add("active")
             document.getElementById("model").disabled = true;
             document.getElementById("prompt").disabled = true;
             captureThinkBtn.disabled = true;
@@ -18,6 +19,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
         } else {
             liveThinkBtn.style.background = ''
             liveThinkBtn.style.color = ''
+            liveThinkBtn.classList.remove("active")
             document.getElementById("model").disabled = false;
             document.getElementById("prompt").disabled = false;
             captureThinkBtn.disabled = false;
@@ -25,8 +27,13 @@ document.addEventListener('DOMContentLoaded', (event) => {
         
     });
 
-    captureThinkBtn.addEventListener('click', function() {
+    captureThinkBtn.addEventListener('mousedown', function() {
         captureImage();
+        captureThinkBtn.classList.add("active")
+    });
+
+    captureThinkBtn.addEventListener('mouseup', function() {
+        captureThinkBtn.classList.remove("active")
     });
 });
 
