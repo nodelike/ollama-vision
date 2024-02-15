@@ -1,3 +1,7 @@
+* {
+    box-sizing: border-box;
+}
+
 body {
     height: 100%;
     box-sizing: border-box;
@@ -7,6 +11,7 @@ body {
     display: flex;
     justify-content: center;
     overflow: hidden;
+    margin: 0;
 }
 
 .app {
@@ -16,35 +21,50 @@ body {
     height: 100vh;
     justify-content: space-around;
     max-width: 780px;
+    background: #111;
+    align-items: center;
+    padding: 0 45px;
+    border-left: 1px solid rgb(125, 125, 125);
+    border-right: 1px solid rgb(125, 125, 125);
 }
 
 .btn-container {
     display: flex;
     justify-content: space-around;
+    width: 100%;
 }
 
 .btn-container button{
     padding: 10px 20px;
-    border: 2px solid white;
-    background: transparent;
-    color: white;
+    border: none;
+    background: white;
+    color: black;
     cursor: pointer;
     transition: 0.1s ease-in;
 }
 
 .btn-container button:hover{
-    background: white;
+    background: #50C878;
+}
+
+.btn-container button[disabled]{
+    background: rgb(172, 172, 172);
     color: black;
+    cursor: not-allowed;
 }
 
 #feed {
     max-height: 50%;
+    width: 85%;
+    border: 1px solid rgb(125, 125, 125);
+    border-radius: 10px;
 }
 
 #response {
-    border: 1px solid rgb(215, 215, 215);
+    width: 100%;
+    border: 1px solid rgb(125, 125, 125);
     border-radius: 8px;
     min-height: 200px;
-    margin: 0;
-    padding: 10px;
+    padding: 25px;
+    font-size: 16px;
 }
