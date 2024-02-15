@@ -1,5 +1,28 @@
+let liveThink = false;
+
 document.addEventListener('DOMContentLoaded', (event) => {
     startCamera();
+
+    const liveThinkBtn = document.getElementById('live-think')
+    const captureThinkBtn = document.getElementById('capture-think')
+
+    liveThinkBtn.addEventListener('click', function() {
+        liveThink = !liveThink;
+        if(liveThink){
+            liveThinkBtn.style.background = '#50C878'
+            captureThinkBtn.disabled = true;
+            captureImage();
+        } else {
+            liveThinkBtn.style.background = ''
+            liveThinkBtn.style.color = ''
+            captureThinkBtn.disabled = false;
+        }
+        
+    });
+
+    captureThinkBtn.addEventListener('click', function() {
+        captureImage();
+    });
 });
 
 function startCamera() {
@@ -38,7 +61,9 @@ function captureImage() {
                 if (event.data === "end-stream") {
                     console.log("Finished!")
                     source.close();
-                    // captureImage();
+                    if (liveThink){
+                        setTimeout(captureImage, 3000);
+                    }
                 } else {
                     responseDiv.textContent += event.data;
                 }
