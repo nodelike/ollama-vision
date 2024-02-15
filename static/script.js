@@ -10,11 +10,13 @@ document.addEventListener('DOMContentLoaded', (event) => {
         liveThink = !liveThink;
         if(liveThink){
             liveThinkBtn.style.background = '#50C878'
+            document.getElementById("system-prompt").disabled = true;
             captureThinkBtn.disabled = true;
             captureImage();
         } else {
             liveThinkBtn.style.background = ''
             liveThinkBtn.style.color = ''
+            document.getElementById("system-prompt").disabled = false;
             captureThinkBtn.disabled = false;
         }
         
@@ -47,7 +49,8 @@ function captureImage() {
         const formData = new FormData();
         formData.append('image', blob);
 
-        
+        const systemPrompt = document.getElementById('system-prompt').value;
+        formData.append('systemPrompt', systemPrompt);
         
         fetch('/process_image', { method: 'POST', body: formData })
         .then(() => {

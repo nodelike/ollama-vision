@@ -2,7 +2,6 @@ from flask import Flask, Response, render_template, request, jsonify
 import ollama
 from PIL import Image
 import io
-from typing import Generator
 from flask_cors import CORS
 from queue import Queue
 import threading
@@ -10,11 +9,9 @@ import threading
 app = Flask(__name__)
 CORS(app)
 
-systemPrompt = 'what is in this image?'
-
 responses = Queue()
 
-def llava(img):
+def llava(img, systemPrompt):
     stream = ollama.generate('vision', systemPrompt, images=[img], stream=True)
     for chunk in stream:
         responses.put(chunk['response'])
@@ -33,7 +30,9 @@ def process_image():
         pil_img.save(img_byte_arr, format='JPEG')
         img_byte_arr = img_byte_arr.getvalue()
         
-        threading.Thread(target=llava, args=(img_byte_arr,)).start()
+        systemPrompt = request.form.get('systemPrompt', 'What is in this image')
+
+        threading.Thread(target=llava, args=(img_byte_arr, systemPrompt)).start()
 
         return jsonify({'message': 'Image processing started'}), 200
 
