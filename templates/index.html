@@ -8,12 +8,22 @@
 </head>
 <body>
     <div class="app">
-        <video id="feed" autoplay></video>
-        <div class="btn-container">
-            <button id="live-think">Live think</button>
-            <button id="capture-think">Capture Think</button>
+        <div class="left-col">
+            <video id="feed" autoplay></video>
+            <span class="inputSpan">
+                <label for="system-prompt">System Prompt:</label>
+                <input id="system-prompt" type="text" placeholder="Enter the system prompt" value="Whats in this image?">
+            </span>
+            
+            <div class="btn-container">
+                <button id="live-think">Live think</button>
+                <button id="capture-think">Capture Think</button>
+            </div>
         </div>
-        <p id="response"></p>
+
+        <div class="right-col">
+            <p id="response">Stalking silently.... 👀</p>
+        </div>
     </div>
     
 </body>

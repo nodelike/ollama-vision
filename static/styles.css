@@ -5,7 +5,7 @@
 body {
     height: 100%;
     box-sizing: border-box;
-    background: black;
+    background: #111;
     font-family: monospace;
     color: white;
     display: flex;
@@ -15,17 +15,46 @@ body {
 }
 
 .app {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+}
+
+.left-col {
+    background: #000000;
+    border-left: 1px solid rgb(125, 125, 125);
+    border-right: 1px solid rgb(125, 125, 125);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 50%;
+}
+
+.right-col {
     display: flex;
     flex-direction: column;
     width: 75%;
     height: 100vh;
-    justify-content: space-around;
+    /* justify-content: space-around; */
     max-width: 780px;
-    background: #111;
     align-items: center;
     padding: 0 45px;
-    border-left: 1px solid rgb(125, 125, 125);
-    border-right: 1px solid rgb(125, 125, 125);
+}
+
+.inputSpan {
+    width: 75%;
+    display: flex;
+    flex-direction: column;
+}
+
+.inputSpan input{
+    background: white;
+    border: rgb(125, 125, 125);
+    border-radius: 6px;
+    padding: 10px 15px;
+    margin-top: 10px;
 }
 
 .btn-container {
@@ -35,12 +64,13 @@ body {
 }
 
 .btn-container button{
-    padding: 10px 20px;
+    padding: 12px 22px;
     border: none;
     background: white;
     color: black;
     cursor: pointer;
     transition: 0.1s ease-in;
+    font-size: 15px;
 }
 
 .btn-container button:hover{
@@ -55,16 +85,17 @@ body {
 
 #feed {
     max-height: 50%;
-    width: 85%;
     border: 1px solid rgb(125, 125, 125);
     border-radius: 10px;
 }
 
 #response {
+    background: black;
     width: 100%;
     border: 1px solid rgb(125, 125, 125);
     border-radius: 8px;
-    min-height: 200px;
+    min-height: 400px;
     padding: 25px;
     font-size: 16px;
+    margin-top: 40px;
 }

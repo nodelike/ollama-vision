@@ -30,7 +30,7 @@ function startCamera() {
         .then(stream => {
             const video = document.querySelector('video');
             video.srcObject = stream;
-            video.play(); // Play the video stream
+            video.play();
         })
         .catch(console.error);
 }
@@ -50,7 +50,6 @@ function captureImage() {
         
         fetch('/process_image', { method: 'POST', body: formData })
         .then(() => {
-            // Connect to the EventSource here
             const source = new EventSource('/stream_response');
 
             source.onmessage = function(event) {
