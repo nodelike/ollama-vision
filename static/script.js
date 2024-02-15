@@ -11,13 +11,15 @@ document.addEventListener('DOMContentLoaded', (event) => {
         liveThink = !liveThink;
         if(liveThink){
             liveThinkBtn.style.background = '#50C878'
-            document.getElementById("system-prompt").disabled = true;
+            document.getElementById("model").disabled = true;
+            document.getElementById("prompt").disabled = true;
             captureThinkBtn.disabled = true;
             captureImage();
         } else {
             liveThinkBtn.style.background = ''
             liveThinkBtn.style.color = ''
-            document.getElementById("system-prompt").disabled = false;
+            document.getElementById("model").disabled = false;
+            document.getElementById("prompt").disabled = false;
             captureThinkBtn.disabled = false;
         }
         
@@ -67,8 +69,11 @@ function captureImage() {
         const formData = new FormData();
         formData.append('image', blob);
 
-        const systemPrompt = document.getElementById('system-prompt').value;
-        formData.append('systemPrompt', systemPrompt);
+        const prompt = document.getElementById('prompt').value;
+        formData.append('prompt', prompt);
+
+        const model = document.getElementById('model').value;
+        formData.append('model', model);
         
         fetch('/process_image', { method: 'POST', body: formData })
         .then(() => {

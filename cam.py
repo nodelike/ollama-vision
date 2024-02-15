@@ -11,8 +11,9 @@ CORS(app)
 
 responses = Queue()
 
-def llava(img, systemPrompt):
-    stream = ollama.generate('vision', systemPrompt, images=[img], stream=True)
+def llava(img, model, prompt):
+    
+    stream = ollama.generate(model, prompt, images=[img], stream=True)
     for chunk in stream:
         responses.put(chunk['response'])
     responses.put("end-stream")
@@ -36,9 +37,10 @@ def process_image():
         pil_img.save(img_byte_arr, format='JPEG')
         img_byte_arr = img_byte_arr.getvalue()
         
-        systemPrompt = request.form.get('systemPrompt', 'What is in this image')
-
-        threading.Thread(target=llava, args=(img_byte_arr, systemPrompt)).start()
+        prompt = request.form.get('prompt', 'What is in this image')
+        model = request.form.get('model', 'llava')
+        
+        threading.Thread(target=llava, args=(img_byte_arr, model, prompt)).start()
 
         return jsonify({'message': 'Image processing started'}), 200
 
