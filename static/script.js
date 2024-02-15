@@ -88,7 +88,7 @@ function captureImage() {
 
             source.onmessage = function(event) {
                 const responseDiv = document.getElementById('response');
-                if (responseDiv.textContent === 'Thinking...') {
+                if (responseDiv.textContent === '>>> Thinking...') {
                     responseDiv.textContent = '>>> ';
                 }
                 if (event.data === "end-stream") {
