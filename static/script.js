@@ -2,6 +2,7 @@ let liveThink = false;
 
 document.addEventListener('DOMContentLoaded', (event) => {
     startCamera();
+    updateModelDropdown();
 
     const liveThinkBtn = document.getElementById('live-think')
     const captureThinkBtn = document.getElementById('capture-think')
@@ -27,6 +28,21 @@ document.addEventListener('DOMContentLoaded', (event) => {
     });
 });
 
+function updateModelDropdown() {
+    fetch('/get_models')
+        .then(response => response.json())
+        .then(models => {
+            const modelSelect = document.getElementById('model');
+            models.forEach(model => {
+                const option = document.createElement('option');
+                option.value = model;
+                option.textContent = model;
+                modelSelect.appendChild(option);
+            });
+        })
+        .catch(console.error);
+}
+
 function startCamera() {
     navigator.mediaDevices.getUserMedia({ video: true })
         .then(stream => {
@@ -36,6 +52,8 @@ function startCamera() {
         })
         .catch(console.error);
 }
+
+
 
 function captureImage() {
     const video = document.querySelector('video');

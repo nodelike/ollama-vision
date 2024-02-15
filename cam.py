@@ -21,6 +21,12 @@ def llava(img, systemPrompt):
 def index():
     return render_template('index.html')
 
+@app.route('/get_models')
+def get_models():
+    model_data = ollama.list()
+    model_names = [model['name'] for model in model_data['models']]
+    return jsonify(model_names)
+
 @app.route('/process_image', methods=['POST'])
 def process_image():
     if 'image' in request.files:
