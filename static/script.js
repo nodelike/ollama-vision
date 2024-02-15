@@ -70,7 +70,7 @@ function captureImage() {
     canvas.width = video.videoWidth;
     canvas.height = video.videoHeight;
 
-    document.getElementById("response").textContent = 'Thinking...';
+    document.getElementById("response").textContent = '>>> Thinking...';
     canvas.getContext('2d').drawImage(video, 0, 0);
     canvas.toBlob(blob => {
         const formData = new FormData();
@@ -89,7 +89,7 @@ function captureImage() {
             source.onmessage = function(event) {
                 const responseDiv = document.getElementById('response');
                 if (responseDiv.textContent === 'Thinking...') {
-                    responseDiv.textContent = '';
+                    responseDiv.textContent = '>>> ';
                 }
                 if (event.data === "end-stream") {
                     console.log("Finished!")
