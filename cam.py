@@ -31,7 +31,6 @@ def process_image():
         pil_img.save(img_byte_arr, format='JPEG')
         img_byte_arr = img_byte_arr.getvalue()
         
-        # Start a new thread for processing the image
         threading.Thread(target=llava, args=(img_byte_arr,)).start()
 
         return jsonify({'message': 'Image processing started'}), 200
