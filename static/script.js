@@ -63,7 +63,6 @@ function startCamera() {
 }
 
 
-
 function captureImage() {
     const video = document.querySelector('video');
     const canvas = document.createElement('canvas');
@@ -72,6 +71,12 @@ function captureImage() {
 
     document.getElementById("response").textContent = '>>> Thinking...';
     canvas.getContext('2d').drawImage(video, 0, 0);
+    
+    const dataURL = canvas.toDataURL('image/jpeg');
+
+    const img = document.getElementById('captured-image');
+    img.src = dataURL;
+
     canvas.toBlob(blob => {
         const formData = new FormData();
         formData.append('image', blob);
