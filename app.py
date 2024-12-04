@@ -8,15 +8,18 @@ import threading
 
 app = Flask(__name__)
 CORS(app)
-
 responses = Queue()
 
-def llava(img, model, prompt):
-    
+def vision(img, model, prompt):
     stream = ollama.generate(model, prompt, images=[img], stream=True)
+    vision = ""
     for chunk in stream:
-        responses.put(chunk['response'])
+        vision += chunk["response"]
+        responses.put(chunk["response"])
     responses.put("end-stream")
+
+    print(vision)
+    return vision
 
 @app.route('/')
 def index():
@@ -37,10 +40,9 @@ def process_image():
         pil_img.save(img_byte_arr, format='JPEG')
         img_byte_arr = img_byte_arr.getvalue()
         
-        prompt = request.form.get('prompt', 'What is in this image')
-        model = request.form.get('model', 'llava')
-        
-        threading.Thread(target=llava, args=(img_byte_arr, model, prompt)).start()
+        prompt = request.form.get('prompt', '')
+
+        threading.Thread(target=vision, args=(img_byte_arr, "llava", prompt)).start()
 
         return jsonify({'message': 'Image processing started'}), 200
 
